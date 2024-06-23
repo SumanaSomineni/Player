@@ -27,7 +27,7 @@ public class PlayerH2Service implements PlayerRepository {
   @Override
   public Player getPlayerById(int playerId) {
     try {
-      Player player = db.queryforObject("SELECT * FROM player where id=", new PlayerRowMapper(), playerId);
+      Player player = db.queryforObject("SELECT * FROM player where playerId=", new PlayerRowMapper(), playerId);
       return player;
     } catch (Exception e) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -42,7 +42,7 @@ public class PlayerH2Service implements PlayerRepository {
         player.getRole());
     Player savedPlayer = db.queryForObject("select * from player where playerName=? and jerseyNumber=? and role=?",
         new PlayerRowMapper(),
-        player.getPlayerName(), player.getJerseyNumber());
+        player.getPlayerName(), player.getJerseyNumber(),player.getRole());
     return savedPlayer;
   }
 
